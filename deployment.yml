@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+ name: kubemantics-deployment
+ labels:
+  app: kubemantics
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: kubemantics
+ template:
+  metadata:
+   labels:
+    app: kubemantics
+  spec:
+   containers: 
+    - name: kubemantics
+      image: giannispoy/kubemantics
+      imagePullPolicy: Always
+      ports:
+       - containerPort: 5000
+    serviceAccountName: kubemantics-service-account
+---
+apiVersion: v1
+kind: Service
+metadata: 
+ name: kubemantics-service
+spec: 
+ ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+ selector:
+  app: kubemantics
+ type: LoadBalancer
