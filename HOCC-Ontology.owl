@@ -1,0 +1,662 @@
+@prefix : <http://www.physics-h2020.eu/physics/HOCC#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.physics-h2020.eu/physics/HOCC> .
+
+<http://www.physics-h2020.eu/physics/HOCC> rdf:type owl:Ontology ;
+                                            owl:versionIRI <http://www.physics-h2020.eu/physics/HOCC/1.0.0> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.physics-h2020.eu/physics/HOCC#consistsOfNodes
+:consistsOfNodes rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 owl:inverseOf :isPartOfCluster ;
+                 rdf:type owl:InverseFunctionalProperty ,
+                          owl:AsymmetricProperty ;
+                 rdfs:domain :Cluster ;
+                 rdfs:range :ClusterNode .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasCostSchema
+:hasCostSchema rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :CloudService ,
+                           :RawComputationalResource ,
+                           :ResourceUnit ;
+               rdfs:range :CostSchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasOperatingSystem
+:hasOperatingSystem rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain :ResourceUnit ;
+                    rdfs:range :OperatingSystem .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasRanBenchmark
+:hasRanBenchmark rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain :Cluster ;
+                 rdfs:range :Benchmark .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasRawComputationalResource
+:hasRawComputationalResource rdf:type owl:ObjectProperty ;
+                             rdfs:subPropertyOf owl:topObjectProperty ;
+                             rdfs:domain :ClusterNode ,
+                                         :ResourceUnit ;
+                             rdfs:range :RawComputationalResource .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasResourceEfficiency
+:hasResourceEfficiency rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdf:type owl:FunctionalProperty ;
+                       rdfs:domain :Cluster ;
+                       rdfs:range :ResourceEfficiency .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasSLA
+:hasSLA rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
+        rdf:type owl:FunctionalProperty ;
+        rdfs:domain :CloudService ;
+        rdfs:range :ServiceLevelAgreement .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasSLATerm
+:hasSLATerm rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :hasSLA ;
+            rdfs:domain :ServiceLevelAgreement ;
+            rdfs:range :ServiceLevelAgreementTerm .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#isHostedOn
+:isHostedOn rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdf:type owl:FunctionalProperty ;
+            rdfs:domain :VirtualResourceUnit ;
+            rdfs:range :CloudService ,
+                       :Compute .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#isModifiedByThreshold
+:isModifiedByThreshold rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdfs:domain :CostSchema ;
+                       rdfs:range :CostThreshold .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#isOfType
+:isOfType rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :ClusterNode ;
+          rdfs:range :ResourceUnit .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#isPartOfCluster
+:isPartOfCluster rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :ClusterNode ;
+                 rdfs:range :Cluster .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#operatesWith
+:operatesWith rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :ClusterNode ;
+              rdfs:range :OperatingSystem .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#producesBenchmarkScore
+:producesBenchmarkScore rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain :BenchmarkWorkload ;
+                        rdfs:range :BenchmarkScore .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#providesCloudService
+:providesCloudService rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain :CloudProvider ;
+                      rdfs:range :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#usesEnergySchema
+:usesEnergySchema rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:domain :Cluster ;
+                  rdfs:range :EnergySchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#usesHypervisor
+:usesHypervisor rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :Cluster ,
+                            :ClusterNode ;
+                rdfs:range :Hypervisor .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#usesPlatform
+:usesPlatform rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdf:type owl:FunctionalProperty ;
+              rdfs:domain :Cluster ;
+              rdfs:range :Platform .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.physics-h2020.eu/physics/HOCC#MemoryAllocated
+:MemoryAllocated rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :BenchmarkWorkload ;
+                 rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#costAlterationOperation
+:costAlterationOperation rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :CostThreshold ;
+                         rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#costAlterationValue
+:costAlterationValue rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain :CostThreshold ;
+                     rdfs:range xsd:decimal ,
+                                xsd:float .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasArchitecture
+:hasArchitecture rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :OperatingSystem ,
+                             :RawComputationalResource ,
+                             :ResourceUnit ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasDefinition
+:hasDefinition rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :ServiceLevelAgreementTerm ;
+               rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasDistribution
+:hasDistribution rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :Platform ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasEnergyScore
+:hasEnergyScore rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Cluster ;
+                rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasID
+:hasID rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdfs:domain :Benchmark ,
+                   :CloudService ,
+                   :Cluster ,
+                   :ClusterNode ,
+                   :Hypervisor ,
+                   :OperatingSystem ,
+                   :Platform ,
+                   :RawComputationalResource ,
+                   :ResourceUnit ;
+       rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasIP
+:hasIP rdf:type owl:DatatypeProperty ;
+       rdfs:subPropertyOf owl:topDataProperty ;
+       rdfs:domain :CloudService ,
+                   :ClusterNode ,
+                   :ResourceUnit ;
+       rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasImage
+:hasImage rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :OperatingSystem ;
+          rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasInstanceID
+:hasInstanceID rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :CloudService ,
+                           :VirtualResourceUnit ;
+               rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasInstanceType
+:hasInstanceType rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :CloudService ,
+                             :VirtualResourceUnit .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasLocality
+:hasLocality rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :Cluster ;
+             rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasPenalty
+:hasPenalty rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :ServiceLevelAgreementTerm ;
+            rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasPerformanceScore
+:hasPerformanceScore rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain :Cluster ;
+                     rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasPrivateIP
+:hasPrivateIP rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :hasIP ;
+              rdfs:domain :ClusterNode ;
+              rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasPublicIP
+:hasPublicIP rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :hasIP .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasRebate
+:hasRebate rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain :ServiceLevelAgreementTerm ;
+           rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasResilienceScore
+:hasResilienceScore rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :Cluster ;
+                    rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasRole
+:hasRole rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :ClusterNode ;
+         rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#hasTargetValue
+:hasTargetValue rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Benchmark ,
+                            :ServiceLevelAgreementTerm ;
+                rdfs:range xsd:float .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#isLocated
+:isLocated rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain :CloudService ,
+                       :ClusterNode ;
+           rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withAllocatableValue
+:withAllocatableValue rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain :RawComputationalResource ;
+                      rdfs:range xsd:int .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withAvgValue
+:withAvgValue rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :withNumValue .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withCapacityValue
+:withCapacityValue rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :RawComputationalResource ;
+                   rdfs:range xsd:int .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withCurrencyType
+:withCurrencyType rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :CostSchema ,
+                              :CostThreshold ;
+                  rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withCurrencyValue
+:withCurrencyValue rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :CostSchema ;
+                   rdfs:range xsd:decimal .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withDistribution
+:withDistribution rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :OperatingSystem ,
+                              :Platform ;
+                  rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withFactor
+:withFactor rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :CostThreshold ;
+            rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withFactorValue
+:withFactorValue rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withMaxValue
+:withMaxValue rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :withNumValue .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withMinValue
+:withMinValue rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :withNumValue .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withNumValue
+:withNumValue rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :BenchmarkScore ,
+                          :CostPerAcquisition ,
+                          :CostPerRequest ,
+                          :CostPerSpecialUnit ,
+                          :CostPerTimePeriod ,
+                          :CostThreshold ,
+                          :EnergyUsage ,
+                          :PowerUsageEffectiveness ,
+                          :RenewableEnergy .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withOperator
+:withOperator rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :CostThreshold ;
+              rdfs:range xsd:string .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#withVersionID
+:withVersionID rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :CloudService ,
+                           :OperatingSystem ,
+                           :Platform ;
+               rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.physics-h2020.eu/physics/HOCC#Benchmark
+:Benchmark rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#BenchmarkScore
+:BenchmarkScore rdf:type owl:Class ;
+                rdfs:subClassOf :Benchmark .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#BenchmarkWorkload
+:BenchmarkWorkload rdf:type owl:Class ;
+                   rdfs:subClassOf :Benchmark .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CPU
+:CPU rdf:type owl:Class ;
+     rdfs:subClassOf :RawComputationalResource .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CloudPlatform
+:CloudPlatform rdf:type owl:Class ;
+               rdfs:subClassOf :Platform .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CloudProvider
+:CloudProvider rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CloudService
+:CloudService rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Cluster
+:Cluster rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#ClusterNode
+:ClusterNode rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Compute
+:Compute rdf:type owl:Class ;
+         rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Computer
+:Computer rdf:type owl:Class ;
+          rdfs:subClassOf :PhysicalResourceUnit ;
+          owl:disjointWith :SingleBoardUnit .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CostPerAcquisition
+:CostPerAcquisition rdf:type owl:Class ;
+                    rdfs:subClassOf :CostSchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CostPerRequest
+:CostPerRequest rdf:type owl:Class ;
+                rdfs:subClassOf :CostSchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CostPerSpecialUnit
+:CostPerSpecialUnit rdf:type owl:Class ;
+                    rdfs:subClassOf :CostSchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CostPerTimePeriod
+:CostPerTimePeriod rdf:type owl:Class ;
+                   rdfs:subClassOf :CostSchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CostSchema
+:CostSchema rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#CostThreshold
+:CostThreshold rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Database
+:Database rdf:type owl:Class ;
+          rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#EnergySchema
+:EnergySchema rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#EnergySource
+:EnergySource rdf:type owl:Class ;
+              rdfs:subClassOf :EnergySchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#EnergyUsage
+:EnergyUsage rdf:type owl:Class ;
+             rdfs:subClassOf :EnergySchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#GPU
+:GPU rdf:type owl:Class ;
+     rdfs:subClassOf :RawComputationalResource .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Hypervisor
+:Hypervisor rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#IoT
+:IoT rdf:type owl:Class ;
+     rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Messaging
+:Messaging rdf:type owl:Class ;
+           rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Miscellaneous
+:Miscellaneous rdf:type owl:Class ;
+               rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Networking
+:Networking rdf:type owl:Class ;
+            rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#OperatingSystem
+:OperatingSystem rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#PhysicalResourceUnit
+:PhysicalResourceUnit rdf:type owl:Class ;
+                      rdfs:subClassOf :ResourceUnit .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Platform
+:Platform rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#PowerUsageEffectiveness
+:PowerUsageEffectiveness rdf:type owl:Class ;
+                         rdfs:subClassOf :EnergySchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Ram
+:Ram rdf:type owl:Class ;
+     rdfs:subClassOf :RawComputationalResource .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#RawComputationalResource
+:RawComputationalResource rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#RenewableEnergy
+:RenewableEnergy rdf:type owl:Class ;
+                 rdfs:subClassOf :EnergySchema .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#ResourceEfficiency
+:ResourceEfficiency rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#ResourceUnit
+:ResourceUnit rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#ServerlessPlatform
+:ServerlessPlatform rdf:type owl:Class ;
+                    rdfs:subClassOf :Platform .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#ServiceLevelAgreement
+:ServiceLevelAgreement rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#ServiceLevelAgreementTerm
+:ServiceLevelAgreementTerm rdf:type owl:Class .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#SingleBoardUnit
+:SingleBoardUnit rdf:type owl:Class ;
+                 rdfs:subClassOf :PhysicalResourceUnit .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Storage
+:Storage rdf:type owl:Class ;
+         rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#TPU
+:TPU rdf:type owl:Class ;
+     rdfs:subClassOf :RawComputationalResource .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#VirtualResourceUnit
+:VirtualResourceUnit rdf:type owl:Class ;
+                     rdfs:subClassOf :ResourceUnit .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#AI&MachineLearning
+<http://www.physics-h2020.eu/physics/HOCC#AI&MachineLearning> rdf:type owl:Class ;
+                                                              rdfs:subClassOf :CloudService .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#BigData&Analytics
+<http://www.physics-h2020.eu/physics/HOCC#BigData&Analytics> rdf:type owl:Class ;
+                                                             rdfs:subClassOf :CloudService .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.physics-h2020.eu/physics/HOCC#BenchmarkScore_1
+:BenchmarkScore_1 rdf:type owl:NamedIndividual ,
+                           :BenchmarkScore .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#BenchmarkWorkload_1
+:BenchmarkWorkload_1 rdf:type owl:NamedIndividual ,
+                              :BenchmarkWorkload ;
+                     :producesBenchmarkScore :BenchmarkScore_1 ;
+                     :MemoryAllocated 256 .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#Cluster_1
+:Cluster_1 rdf:type owl:NamedIndividual ,
+                    :Cluster .
+
+
+###  http://www.physics-h2020.eu/physics/HOCC#OpenwhiskDeployedOnCluster1
+:OpenwhiskDeployedOnCluster1 rdf:type owl:NamedIndividual ,
+                                      :ServerlessPlatform .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
